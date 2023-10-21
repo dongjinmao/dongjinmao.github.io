@@ -205,7 +205,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-10-21 14:03:39 / 修改时间：14:44:04" itemprop="dateCreated datePublished" datetime="2023-10-21T14:03:39+08:00">2023-10-21</time>
+              <time title="创建时间：2023-10-21 14:03:39 / 修改时间：15:45:49" itemprop="dateCreated datePublished" datetime="2023-10-21T14:03:39+08:00">2023-10-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,6 +238,34 @@
 </ol>
 <h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>使用头文件示意图</p>
 <p><img src="/images/loading.png" data-original="/2023/10/21/learnC/%E4%BD%BF%E7%94%A8%E5%A4%B4%E6%96%87%E4%BB%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="使用头文件示意图"></p>
+<blockquote>
+<p><em><strong>注意点</strong></em>：在 Visual Studio 中，C 语言文件（.c）可以调用另一个 C 语言文件中的函数，即使没有包含相应的头文件（.h）。这是因为 Visual Studio 默认会在全局符号表中包含所有编译过的源文件的符号。</p>
+<p>当你在一个 C 语言文件中定义函数时，该函数的符号将被添加到全局符号表中。如果你在另一个 C 语言文件中调用该函数，Visual Studio 将在全局符号表中查找该函数符号，并链接到正确的函数实现。</p>
+<p>然而，这种做法并不推荐，因为它可能导致名称冲突和其他问题。最佳实践是使用头文件来声明函数和变量，并在需要时包含相应的头文件。这样可以确保在不同源文件之间正确地共享函数和变量定义，并提高代码的可读性和可维护性。</p>
+</blockquote>
+<p><strong>myfuns.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//实现函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">sayHello</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;hello C&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>myfuns.h</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">sayHello</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>hello.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;myfuns.h&quot;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	sayHello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="注意事项和细节说明"><a href="#注意事项和细节说明" class="headerlink" title="注意事项和细节说明"></a>注意事项和细节说明</h3><ol>
+<li><p>引用头文件相当于复制头文件的内容</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;myfuns.h&quot;</span> 这句代码相当于将其内容复制过来</span></span><br><span class="line">	||</span><br><span class="line"><span class="comment">//声明函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">sayHello</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>源文件的名字可以不和头文件一样，但是为了好管理，一般头文件名和源文件名一样。</p>
+</li>
+<li><p>C语言中 **include&lt;&gt;<strong>与</strong>include””**的区别</p>
+<ul>
+<li>include&lt;&gt;:</li>
+</ul>
+</li>
+</ol>
 
       
     </div>
